@@ -10,12 +10,4 @@
     1. ![ScreanShot](https://raw.githubusercontent.com/fikrimuhal/hivecdn-beinconnect-injector/master/img/s3.png)
 4. İndirdiğiniz klasörün içinde bulunan "hivecdn-beinconnect-injector/src" yolunu seçiniz
     1. ![ScreanShot](https://raw.githubusercontent.com/fikrimuhal/hivecdn-beinconnect-injector/master/img/s4.png)
-5. Chrome kapatıp terminal açıp aşağıdaki komutla chrome browser'ı çalıştırın (OSX için)
-    ```
-      open -a Google\ Chrome --args --disable-web-security --user-data-dir
-    ```
-
-6. Açılan  chrome browser üzerinden beinconnect  [https://www.beinconnect.com.tr/](https://www.beinconnect.com.tr/) sitesine gidiniz.
-7. Adres çubuğunda sağ tarafda bulunan "Kalkan" iconu'na tıklınız açılan popup'da "Load unsafe scripts"  linkine tıklayınız
-    1. ![ScreanShot](https://raw.githubusercontent.com/fikrimuhal/hivecdn-beinconnect-injector/master/img/s5.png)
-8. Tebrikler , Hivecdn scriptleri yüklenmiştir.
+5. Tebrikler , [https://www.beinconnect.com.tr/](https://www.beinconnect.com.tr/)  sitesi için  Hivecdn scriptleri yüklenmiştir.
