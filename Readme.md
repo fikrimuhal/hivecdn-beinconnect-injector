@@ -2,7 +2,7 @@
 
 ### Kurulum
 
-1. Repo'daki dosyaları bilgisayarınızı bir folder'a kaydedin
+1. Repo'daki dosyaları bilgisayarınıza indirin
     1. ![ScreanShot](https://raw.githubusercontent.com/fikrimuhal/hivecdn-beinconnect-injector/master/img/s1.png)
 2. Chrome > More Tools >  Extensions   sayfasını açın.
     1. ![ScreanShot](https://raw.githubusercontent.com/fikrimuhal/hivecdn-beinconnect-injector/master/img/s2.png)
