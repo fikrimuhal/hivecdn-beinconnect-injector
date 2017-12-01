@@ -1,0 +1,38 @@
+{
+  "name": "HiveCDN Injector",
+  "description": "HivecdnJS client injector for bitmovin dash player  of beinconnect website",
+  "version": "0.1",
+  "manifest_version": 3,
+  "icons": {
+    "16": "favicon.ico",
+    "128": "favicon.ico"
+  },
+  "permissions": [
+    "tabs"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.beinconnect.com.tr/*"
+      ],
+      "js": [
+        "inject.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://www.beinconnect.com.tr/*"
+      ],
+      "js": [
+        "inject_end.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "start.js"
+  ]
+}
