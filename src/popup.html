@@ -5,10 +5,18 @@
     <title>Title</title>
     <script src="chart.js"></script>
     <script src="jquery.min.js"></script>
+    <script src="assets/bs-toggle.min.js"></script>
     <link rel="stylesheet" href="bs.min.css">
+    <link rel="stylesheet" href="assets/bs-toggle.min.css">
 </head>
 <body>
 <div class="container">
+    <div class="row" style="padding-left: 20%">
+
+            <input type="checkbox" id="chEnabled" data-on="Hivecdn Active" data-off="Hivecdn Disabled" checked data-toggle="toggle">
+
+    </div>
+    <hr>
     <div class="row">
         <canvas id="myChart" width="200" height="200"></canvas>
     </div>

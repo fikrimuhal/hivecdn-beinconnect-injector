@@ -9,4 +9,21 @@ function injectScript(file_path, tag) {
     sc3.setAttribute("src", "https://static.hivecdn.com/hivecdnjs-demo-plugin.min.js?v=2");
     node.appendChild(sc3);
 }
-injectScript(chrome.extension.getURL('start.js'), 'body');
+
+// if (localStorage.inject === undefined || localStorage.inject === "true") {
+//     injectScript(chrome.extension.getURL('start.js'), 'body');
+// }
+
+
+
+
+chrome.storage.sync.get(['inject'], function(conf) {
+    console.log('conf retrieved', conf)
+    if (conf !== undefined && (conf.inject === undefined || conf.inject === "true")) {
+        injectScript(chrome.extension.getURL('start.js'), 'body');
+    }
+});
+
+
+
+

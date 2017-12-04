@@ -23,13 +23,12 @@ data = {
     
 };
 var myChart = new Chart(ctx, {
-    type: 'doughnut', data: data,
-    options:{
+    type: 'doughnut', data: data, options: {
         title: {
             display: true, text: 'Data Source Distribution (in MB)'
         }
     }
-   
+    
 });
 
 window.addEventListener("message", function (event) {
@@ -60,6 +59,7 @@ function updateStat() {
     $('.crossPercent').html(stats.crossPercent.toFixed(2));
     $('.connectedPeer').html(stats.connectedPeer);
 }
+
 chrome.runtime.onMessageExternal.addListener(function (request, sender, sendResponse) {
     if (sender.url.indexOf('beinconnect') === -1) return;
     console.log('message received', request);
@@ -70,4 +70,19 @@ chrome.runtime.onMessageExternal.addListener(function (request, sender, sendResp
         updateChart();
         updateStat();
     }
+});
+
+chrome.storage.sync.get(['inject'], function (conf) {
+    
+    if (conf !== undefined && (conf.inject === undefined || conf.inject === "true")) {
+        $('#chEnabled').prop('checked', true).change();
+    } else {
+        $('#chEnabled').prop('checked', false).change();
+    }
+});
+$('#chEnabled').change(function () {
+    var checked = $('#chEnabled').prop('checked') ? "true" : "false";
+    chrome.storage.sync.set({'inject': checked}, function () {
+        console.log('Settings saved');
+    });
 });
