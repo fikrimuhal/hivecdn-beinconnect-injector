@@ -39,5 +39,9 @@
   "browser_action": {
     "default_popup": "popup.html",
     "default_title": "Hivecdn Usage Detail"
+  },
+  "externally_connectable": {
+    "matches": ["https://www.beinconnect.com.tr/*"],
+    "accept_tls_channel_id":true
   }
 }

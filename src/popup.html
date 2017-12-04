@@ -4,9 +4,80 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="chart.js"></script>
+    <script src="jquery.min.js"></script>
+    <link rel="stylesheet" href="bs.min.css">
 </head>
 <body>
-<canvas id="myChart" width="200" height="200"></canvas>
+<div class="container">
+    <div class="row">
+        <canvas id="myChart" width="200" height="200"></canvas>
+    </div>
+    <div class="row">
+        <table class="table table-striped table-hover table-bordered">
+            <!--<caption>Stats</caption>-->
+            <!--<thead>-->
+            <!--<tr>-->
+            <!--<th>Stat</th>-->
+            <!--<th>Value</th>-->
+
+            <!--</tr>-->
+            <!--</thead>-->
+            <tbody id="statTable">
+            <tr>
+                <td style="font-weight: bolder;font-size: 10px">
+                    Connected Peer
+                </td>
+                <td class="connectedPeer"></td>
+            </tr>
+            <tr>
+                <td style="font-weight: bolder;font-size: 10px">
+                    Total Download(mb)
+                </td>
+                <td class="totalDownload"></td>
+            </tr>
+            <tr>
+                <td style="font-weight: bolder;font-size: 10px">
+                    Http Download(mb)
+                </td>
+                <td class="httpDownload"></td>
+            </tr>
+            <tr>
+                <td style="font-weight: bolder;font-size: 10px">
+                    P2P Download(mb)
+                </td>
+                <td class="p2pDownload"></td>
+            </tr>
+            <tr>
+                <td style="font-weight: bolder;font-size: 10px">
+                    P2P Upload(mb)
+                </td>
+                <td class="p2pUpload"></td>
+            </tr>
+            <tr>
+                <td style="font-weight: bolder;font-size: 10px">
+                    P2P %
+                </td>
+                <td class="p2pPercent"></td>
+            </tr>
+            <tr>
+                <td style="font-weight: bolder;font-size: 10px">
+                    Http %
+                </td>
+                <td class="httpPercent"></td>
+            </tr>
+            <tr>
+                <td style="font-weight: bolder;font-size: 10px">
+                    P2P/Http
+                </td>
+                <td class="crossPercent"></td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
 
 </body>
 
