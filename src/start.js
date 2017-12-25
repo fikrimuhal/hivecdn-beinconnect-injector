@@ -24,8 +24,15 @@ checkLoaded('bitmovin', 100, 20).then(function (bitmovinLoaded) {
                 if (document.getElementById('player') !== undefined) {
                     const player = bitmovin.player('player');
                     player.addEventHandler('onReady', function (event) {
-                        const url = hivecdn.util.url.removeQueryString(player.getConfig().source.dash);
-                        hivecdn.registerPlayer(player, hivecdn.PlayerVendors.BITMOVIN, url, hivecdn.StreamTypes.DASH);
+                        if(player.getConfig().source.dash !== undefined){
+                            const url = hivecdn.util.url.removeQueryString(player.getConfig().source.dash);
+                            hivecdn.registerPlayer(player, hivecdn.PlayerVendors.BITMOVIN, url, hivecdn.StreamTypes.DASH);
+                        }
+                        else if(player.getConfig().source.hls !== undefined) {
+                            const url = hivecdn.util.url.removeQueryString(player.getConfig().source.hls);
+                            hivecdn.registerPlayer(player, hivecdn.PlayerVendors.BITMOVIN, url, hivecdn.StreamTypes.HLS);
+                        }
+                        
                     });
                 }
                 
