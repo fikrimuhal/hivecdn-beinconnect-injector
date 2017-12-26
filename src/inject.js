@@ -15,7 +15,7 @@ function injectLibraries() {
     var sc1 = document.createElement("script");
     var sc2 = document.createElement("script");
 //var sc3 = document.createElement("script");
-    sc1.setAttribute("src", "https://static.hivecdn.com/hivecdn.min.js?v="+Date.now());
+    sc1.setAttribute("src", "https://static.hivecdn.com/hivecdn.digiturk.min.js?v="+Date.now());
     sc2.setAttribute("src", "https://static.hivecdn.com/hivecdnjs-bitmovin-plugin.min.js?v="+Date.now());
 //sc3.setAttribute("src", "https://static.hivecdn.com/hivecdnjs-demo-plugin.min.js");
     sc1.async = false;

@@ -10,12 +10,6 @@ function injectScript(file_path, tag) {
     node.appendChild(sc3);
 }
 
-// if (localStorage.inject === undefined || localStorage.inject === "true") {
-//     injectScript(chrome.extension.getURL('start.js'), 'body');
-// }
-
-
-
 
 chrome.storage.sync.get(['inject'], function(conf) {
     console.log('conf retrieved', conf)
