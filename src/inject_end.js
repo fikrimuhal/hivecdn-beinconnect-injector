@@ -6,7 +6,7 @@ function injectScript(file_path, tag) {
     node.appendChild(script);
     
     var sc3 = document.createElement("script");
-    sc3.setAttribute("src", "https://static.hivecdn.com/hivecdnjs-demo-plugin.min.js?v="+Date.now());
+    sc3.setAttribute("src", "https://static.hivecdn.com/hivecdnjs-demo-plugin.production.min.js?v="+Date.now());
     node.appendChild(sc3);
 }
 
