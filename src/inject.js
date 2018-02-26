@@ -1,27 +1,24 @@
-// if (localStorage.inject === undefined || localStorage.inject === "true") {
-//     injectLibraries();
-// }
+var debug = false;
 
-
-chrome.storage.sync.get(['inject'], function(conf) {
-    console.log('conf retrieved', conf)
+chrome.storage.sync.get(['inject'], function (conf) {
+    console.log('conf retrieved', conf);
     if (conf !== undefined && (conf.inject === undefined || conf.inject === "true")) {
-        injectLibraries();
+        var scripts = ['https://static.hivecdn.com/hivecdn.production.min.js', 'https://static.hivecdn.com/hivecdnjs-bitmovin-plugin.production.min.js'];
+        var dev_scripts = ['http://mesut.ofis:9001/hivecdnv2client-fastopt-bundle.js', 'http://192.168.2.11:5010/hivecdnjs-bitmovin-plugin.min.js', 'http://mesut.ofis:5005/hivecdnjs-demo-plugin.min.js'];
+        injectLibraries(debug ? dev_scripts : scripts);
     }
 });
 
 
-function injectLibraries() {
-    var sc1 = document.createElement("script");
-    var sc2 = document.createElement("script");
-//var sc3 = document.createElement("script");
-    sc1.setAttribute("src", "https://static.hivecdn.com/hivecdn.production.min.js?v="+Date.now());
-    sc2.setAttribute("src", "https://static.hivecdn.com/hivecdnjs-bitmovin-plugin.production.min.js?v="+Date.now());
-//sc3.setAttribute("src", "https://static.hivecdn.com/hivecdnjs-demo-plugin.min.js");
-    sc1.async = false;
-    sc2.async = false;
-//sc3.async = false;
-    document.documentElement.appendChild(sc1);
-    document.documentElement.appendChild(sc2);
-//document.documentElement.appendChild(sc3);
+function injectLibraries(links) {
+    links.forEach(function (src) {
+        inject(src);
+    });
+}
+
+function inject(src) {
+    var _scriptElement = document.createElement("script");
+    _scriptElement.setAttribute("src", src + "?v=" + Date.now());
+    _scriptElement.async = false;
+    document.documentElement.appendChild(_scriptElement);
 }

@@ -20,20 +20,26 @@ checkLoaded('bitmovin', 100, 20).then(function (bitmovinLoaded) {
     if (bitmovinLoaded) {
         checkLoaded('hivecdn', 100, 20).then(function (hivecdnLoaded) {
             if (hivecdnLoaded) {
-                //const player = bitmovin.player('playerLiveTvBitmovin');
-                if (document.getElementById('player') !== undefined) {
-                    const player = bitmovin.player('player');
-                    player.addEventHandler('onReady', function (event) {
-                        if(player.getConfig().source.dash !== undefined){
-                            const url = hivecdn.util.url.removeQueryString(player.getConfig().source.dash);
-                            hivecdn.registerPlayer(player, hivecdn.PlayerVendors.BITMOVIN, url, hivecdn.StreamTypes.DASH);
-                        }
-                        else if(player.getConfig().source.hls !== undefined) {
-                            const url = hivecdn.util.url.removeQueryString(player.getConfig().source.hls);
-                            hivecdn.registerPlayer(player, hivecdn.PlayerVendors.BITMOVIN, url, hivecdn.StreamTypes.HLS);
-                        }
-                        
-                    });
+                hivecdn.settings({
+                    siteId: 'beinconnect'
+                });
+                var playerContainer = existsElement('playerLiveTvBitmovin') ? "playerLiveTvBitmovin" : existsElement('player') ? "player" : undefined;
+                if (playerContainer !== undefined) {
+                    const player = bitmovin.player(playerContainer);
+                    if (player !== undefined) {
+                        player.addEventHandler('onReady', function (event) {
+                            if (player.getConfig().source.dash !== undefined) {
+                                const url = hivecdn.util.url.removeQueryString(player.getConfig().source.dash);
+                                hivecdn.registerPlayer(player, hivecdn.PlayerVendors.BITMOVIN, url, hivecdn.StreamTypes.DASH);
+                            } else if (player.getConfig().source.hls !== undefined) {
+                                const url = hivecdn.util.url.removeQueryString(player.getConfig().source.hls);
+                                hivecdn.registerPlayer(player, hivecdn.PlayerVendors.BITMOVIN, url, hivecdn.StreamTypes.HLS);
+                            }
+                            
+                        });
+                    } else {
+                        console.log("player not found in this page");
+                    }
                 }
                 
             } else {
@@ -46,5 +52,6 @@ checkLoaded('bitmovin', 100, 20).then(function (bitmovinLoaded) {
 });
 
 
-
-
+function existsElement(id) {
+    return document.getElementById(id) !== null;
+}
