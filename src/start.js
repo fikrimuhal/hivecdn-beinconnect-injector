@@ -26,17 +26,24 @@ checkLoaded('bitmovin', 100, 20).then(function (bitmovinLoaded) {
                 var playerContainer = existsElement('playerLiveTvBitmovin') ? "playerLiveTvBitmovin" : existsElement('player') ? "player" : undefined;
                 if (playerContainer !== undefined) {
                     const player = bitmovin.player(playerContainer);
+                    console.log("Player instance", player);
+                    const setupPlayer = function () {
+                        if (player.getConfig().source.dash !== undefined) {
+                            const url = hivecdn.util.url.removeQueryString(player.getConfig().source.dash);
+                            hivecdn.registerPlayer(player, hivecdn.PlayerVendors.BITMOVIN, url, hivecdn.StreamTypes.DASH);
+                        } else if (player.getConfig().source.hls !== undefined) {
+                            const url = hivecdn.util.url.removeQueryString(player.getConfig().source.hls);
+                            hivecdn.registerPlayer(player, hivecdn.PlayerVendors.BITMOVIN, url, hivecdn.StreamTypes.HLS);
+                        }
+                    };
                     if (player !== undefined) {
-                        player.addEventHandler('onReady', function (event) {
-                            if (player.getConfig().source.dash !== undefined) {
-                                const url = hivecdn.util.url.removeQueryString(player.getConfig().source.dash);
-                                hivecdn.registerPlayer(player, hivecdn.PlayerVendors.BITMOVIN, url, hivecdn.StreamTypes.DASH);
-                            } else if (player.getConfig().source.hls !== undefined) {
-                                const url = hivecdn.util.url.removeQueryString(player.getConfig().source.hls);
-                                hivecdn.registerPlayer(player, hivecdn.PlayerVendors.BITMOVIN, url, hivecdn.StreamTypes.HLS);
-                            }
+                        if (player.isReady()) setupPlayer(); else {
+                            player.addEventHandler('onReady', function (event) {
+                                console.log("Player is ready", player);
+                                setupPlayer();
+                            });
                             
-                        });
+                        }
                     } else {
                         console.log("player not found in this page");
                     }
