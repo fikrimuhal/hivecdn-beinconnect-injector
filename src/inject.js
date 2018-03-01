@@ -1,4 +1,4 @@
-var debug = true;
+var debug = false;
 
 chrome.storage.sync.get(['inject'], function (conf) {
     console.log('conf retrieved', conf);
