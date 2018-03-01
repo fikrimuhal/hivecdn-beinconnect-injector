@@ -15,7 +15,7 @@
   "content_scripts": [
     {
       "matches": [
-        "https://www.beinconnect.com.tr/*"
+        "*://*.beinconnect.com.tr/*"
       ],
       "js": [
         "inject.js"
@@ -42,7 +42,7 @@
     "default_title": "Hivecdn Usage Detail"
   },
   "externally_connectable": {
-    "matches": ["https://www.beinconnect.com.tr/*"],
-    "accept_tls_channel_id":true
+    "matches": ["*://*.beinconnect.com.tr/*"],
+    "accept_tls_channel_id":false
   }
 }

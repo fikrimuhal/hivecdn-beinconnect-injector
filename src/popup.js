@@ -31,13 +31,6 @@ var myChart = new Chart(ctx, {
     
 });
 
-window.addEventListener("message", function (event) {
-    console.log('addEventListener-message', event);
-    // We only accept messages from ourselves
-    if (event.source != window) return;
-    
-    
-});
 
 function updateChart() {
     const cdn = stats.cdnDownload / 1000000;
@@ -61,10 +54,11 @@ function updateStat() {
 }
 
 chrome.runtime.onMessageExternal.addListener(function (request, sender, sendResponse) {
-    if (sender.url.indexOf('beinconnect') === -1) return;
     console.log('message received', request);
-    
+    if (sender.url.indexOf('beinconnect') === -1) return;
+
     if (request.to === "extention") {
+        sendResponse("[extention] statları aldım")
         //{to: "extention", cmd: "stat_changed", payload: lastValues};
         stats = request.payload;
         updateChart();
