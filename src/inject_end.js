@@ -7,12 +7,12 @@ function injectScript(file_path, tag) {
 }
 
 
-chrome.storage.sync.get(['inject'], function(conf) {
-    console.log('conf retrieved', conf)
+chrome.storage.sync.get(['inject'], function (conf) {
     if (conf !== undefined && (conf.inject === undefined || conf.inject === "true")) {
         injectScript(chrome.extension.getURL('start.js'), 'body');
     }
 });
+
 
 
 
