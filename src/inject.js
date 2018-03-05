@@ -2,12 +2,11 @@ var debug = false;
 document.addEventListener("DOMContentLoaded", function () {
     chrome.storage.sync.get(['inject'], function (conf) {
         if (conf !== undefined && (conf.inject === undefined || conf.inject === "true")) {
-            var scripts = ['https://static.hivecdn.com/hivecdn.production.min.js',
-                'https://static.hivecdn.com/hivecdnjs-bitmovin-plugin.production.min.js',
-                'https://static.hivecdn.com/hivecdnjs-demo-plugin.production.min.js'
+            var scripts = ['https://static.hivecdn.com/hivecdn.production.min.js', 'https://static.hivecdn.com/hivecdnjs-bitmovin-plugin.production.min.js', 'https://static.hivecdn.com/hivecdnjs-demo-plugin.production.min.js'
             
             ];
             var dev_scripts = ['http://mesut.ofis:9001/hivecdnv2client-fastopt-bundle.js', 'http://192.168.2.11:5010/hivecdnjs-bitmovin-plugin.min.js', 'http://mesut.ofis:5005/hivecdnjs-demo-plugin.min.js'];
+            var master_scripts = ['https://static.hivecdn.com/hivecdn.master.min.js', 'https://static.hivecdn.com/hivecdnjs-bitmovin-plugin.master.min.js', 'https://static.hivecdn.com/hivecdnjs-demo-plugin.master.min.js'];
             injectLibraries(debug ? dev_scripts : scripts);
         }
     });
