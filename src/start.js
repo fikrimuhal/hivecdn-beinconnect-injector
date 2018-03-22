@@ -1,122 +1,3 @@
-const debugTable = `
-<div class="debugConsole" style="background: rgba(0,0,0,0.5);
-    color: white;
-    position: fixed;
-    right: 0;
-    top: 0;
-    margin-top: 10px;
-    margin-right: 10px;
-    width: 250px;
-    min-height: 100px;
-    padding: 10px;
-    font-size: 10px;
-    z-index: 99999999;
-">
-<table>
-                        <tbody>
-                            <tr>
-                                <td style="font-weight: bold;
-                                    font-size: 11px;
-                                    display: run-in !important;">
-                                    Connected Peer= <strong class="connectedPeer" style="color:green;font-size: 12px"></strong>
-                                </td>
-                                
-                            </tr>
-                            <tr>
-                                <td style="font-weight: bold;
-                                    font-size: 11px;
-                                    display: run-in !important;">
-                                    Total Download(mb)= <strong class="totalDownload" style="color:green;font-size: 12px"></strong>
-                                </td>
-                               
-                            </tr>
-                            <tr>
-                                <td style="font-weight: bold;
-                                    font-size: 11px;
-                                    display: run-in !important;">
-                                    Total Upload(mb) = <strong class="totalUpload" style="color:green;font-size: 12px"></strong>
-                                </td>
-                                
-                            </tr>
-                            <tr>
-                                <td style="font-weight: bold;
-                                    font-size: 11px;
-                                    display: run-in !important;">
-                                    Http Download(mb)= <strong class="httpDownload" style="color:green;font-size: 12px"></strong>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="font-weight: bold;
-                                    font-size: 11px;
-                                    display: run-in !important;">
-                                    P2P Download(mb) =  <strong class="p2pDownload" style="color:green;font-size: 12px"></strong>
-                                </td>
-                               
-                            </tr>
-                            <tr>
-                                <td style="font-weight: bold;
-                                    font-size: 11px;
-                                    display: run-in !important;">
-                                    P2P Upload(mb) =  <strong class="p2pUpload" style="color:green;font-size: 12px"></strong>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="font-weight: bold;
-                                    font-size: 11px;
-                                    display: run-in !important;">
-                                    P2P/Total (%) =  <strong class="p2pPercent" style="color:green;font-size: 12px"></strong>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="font-weight: bold;
-                                    font-size: 11px;
-                                    display: run-in !important;">
-                                    Http/Total (%) =  <strong class="httpPercent" style="color:green;font-size: 12px"></strong>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="font-weight: bold;
-                                    font-size: 11px;
-                                    display: run-in !important;">
-                                    P2P / HTTP =  <strong class="crossPercent" style="color:green;font-size: 12px"></strong>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="font-weight: bold;
-                                    font-size: 11px;
-                                    display: run-in !important;">
-                                    DownloadRate (mbps) =   <strong class="downloadRate" style="color:green;font-size: 12px"></strong>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="font-weight: bold;
-                                    font-size: 11px;
-                                    display: run-in !important;">
-                                    P2P Download Rate (mbps) =   <strong class="p2pDownloadRate" style="color:green;font-size: 12px"></strong>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="font-weight: bold;
-                                    font-size: 11px;
-                                    display: run-in !important;">
-                                    Http Download Rate (mbps)  =   <strong class="httpDownloadRate" style="color:green;font-size: 12px"></strong>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="font-weight: bold;
-                                    font-size: 11px;
-                                    display: run-in !important;">
-                                    P2P Upload Rate (mbps) =   <strong class="p2pUploadRate" style="color:green;font-size: 12px"></strong>
-                                </td>
-                            </tr>
-                 
-                        </tbody>
-
-
-                    </table>
-</div>
-`;
-
 
 function checkLoaded(variable, interval, maxCount) {
     var count = 0;
@@ -139,11 +20,22 @@ function checkLoaded(variable, interval, maxCount) {
         }
     });
 }
-
+function enableDebugConsole(playerContainer) {
+    hivecdn.debugConsole.enable(playerContainer,false);
+    function doc_keyUp(e) {
+        if (e.ctrlKey && (e.keyCode === 72 || e.keyCode === 77)) window.hivecdn.debugConsole.toogle();
+    }
+    
+    document.addEventListener('keyup', doc_keyUp, false);
+    
+}
+function existsElement(id) {
+    return document.getElementById(id) !== null;
+}
 setTimeout(function () {
-    checkLoaded('hivecdn', 250, 100).then(function (hivecdnLoaded) {
+    checkLoaded('hivecdn', 250, 500).then(function (hivecdnLoaded) {
         if (hivecdnLoaded) {
-            checkLoaded('bitmovin', 250, 100).then(function (bitmovinLoaded) {
+            checkLoaded('bitmovin', 250, 500).then(function (bitmovinLoaded) {
                 if (bitmovinLoaded) {
                     setTimeout(function () {
                         window.hivecdn.settings({
@@ -162,6 +54,7 @@ setTimeout(function () {
                                     const url = hivecdn.util.url.removeQueryString(player.getConfig().source.hls);
                                     window.hivecdn.registerPlayer(player, hivecdn.PlayerVendors.BITMOVIN, url, hivecdn.StreamTypes.HLS);
                                 }
+                                enableDebugConsole(playerContainer)
                             };
                             if (player !== undefined) {
                                 if (player.isReady()) setupPlayer(); else {
@@ -195,26 +88,6 @@ setTimeout(function () {
 }, 1000);
 
 
-var isShowing = false;
 
-function existsElement(id) {
-    return document.getElementById(id) !== null;
-}
 
-function doc_keyUp(e) {
-    
-    // this would test for whichever key is 40 and the ctrl key at the same time
-    if (e.ctrlKey && e.keyCode == 72) {
-        // call your function to do the thing
-        if (isShowing) {
-            $('.debugConsole').remove();
-            isShowing=false
-        } else {
-            $('body').prepend(debugTable);
-            isShowing=true
-            
-        }
-    }
-}
 
-document.addEventListener('keyup', doc_keyUp, false);
