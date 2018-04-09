@@ -21,7 +21,7 @@ function checkLoaded(variable, interval, maxCount) {
     });
 }
 function enableDebugConsole(playerContainer) {
-    hivecdn.debugConsole.enable(playerContainer,false);
+    window.hivecdn.debugConsole.enable(playerContainer,false);
     function doc_keyUp(e) {
         if (e.ctrlKey && (e.keyCode === 72 || e.keyCode === 77)) window.hivecdn.debugConsole.toogle();
     }
