@@ -47,28 +47,16 @@ setTimeout(function () {
                             const player = bitmovin.player(playerContainer);
                             console.log("Player instance", player);
                             const setupPlayer = function () {
-                                if (player.getConfig().source.dash !== undefined) {
-                                    const url = hivecdn.util.url.removeQueryString(player.getConfig().source.dash);
-                                    window.hivecdn.registerPlayer(player, hivecdn.PlayerVendors.BITMOVIN, url, hivecdn.StreamTypes.DASH);
-                                } else if (player.getConfig().source.hls !== undefined) {
-                                    const url = hivecdn.util.url.removeQueryString(player.getConfig().source.hls);
-                                    window.hivecdn.registerPlayer(player, hivecdn.PlayerVendors.BITMOVIN, url, hivecdn.StreamTypes.HLS);
-                                }
+                                window.hivecdn.registerPlayer(player, hivecdn.PlayerVendors.BITMOVIN);
                                 enableDebugConsole(playerContainer)
                             };
                             if (player !== undefined) {
-                                if (player.isReady()) setupPlayer(); else {
-                                    player.addEventHandler('onReady', function (event) {
-                                        console.log("Player is ready", player);
-                                        setupPlayer();
-                                    });
-                                    
-                                }
+                                setupPlayer();
                             } else {
                                 console.log("player not found in this page");
                             }
                         } else {
-                            console.log("bitmovin yüklenemedi", window.bitmovin);
+                            console.log("bitmovin library yüklenemedi");
                         }
                         
                         
@@ -80,11 +68,9 @@ setTimeout(function () {
             });
             
         } else {
-            console.log('EXT: -> hivecdn not loaded');
+            console.log('EXT: -> hivecdnjs not loaded');
         }
     });
-    
-    
 }, 1000);
 
 
