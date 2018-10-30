@@ -1,4 +1,3 @@
-
 function checkLoaded(variable, interval, maxCount) {
     var count = 0;
     return new Promise(function (resolve, reject) {
@@ -12,7 +11,7 @@ function checkLoaded(variable, interval, maxCount) {
                 finish();
             }
         }, interval);
-        
+
         function finish() {
             console.log('EXT: -> ' + variable + 'loaded');
             clearTimeout(timerId);
@@ -20,53 +19,70 @@ function checkLoaded(variable, interval, maxCount) {
         }
     });
 }
+
 function enableDebugConsole(playerContainer) {
-    window.hivecdn.debugConsole.enable(playerContainer,false);
+    window.hivecdn.debugConsole.activate(playerContainer)
+
+
     function doc_keyUp(e) {
         if (e.ctrlKey && (e.keyCode === 72 || e.keyCode === 77)) window.hivecdn.debugConsole.toogle();
     }
-    
+
     document.addEventListener('keyup', doc_keyUp, false);
-    
+
 }
+
 function existsElement(id) {
     return document.getElementById(id) !== null;
 }
+
+
+const hivecdnLoadFuture = function () {
+    return checkLoaded('hivecdn', 250, 500)
+};
+const bitmovinLoadFuture = function () {
+    return checkLoaded('bitmovin', 250, 500)
+}
+
 setTimeout(function () {
     checkLoaded('hivecdn', 250, 500).then(function (hivecdnLoaded) {
         if (hivecdnLoaded) {
-            checkLoaded('bitmovin', 250, 500).then(function (bitmovinLoaded) {
-                if (bitmovinLoaded) {
-                    setTimeout(function () {
-                        window.hivecdn.settings({
-                            siteId: 'beinconnect'
-                        });
-                        var playerContainer = existsElement('playerLiveTvBitmovin') ? "playerLiveTvBitmovin" : existsElement('player') ? "player" : undefined;
-                        // noinspection EqualityComparisonWithCoercionJS
-                        if (playerContainer !== undefined && window.bitmovin != undefined && window.bitmovin.player != undefined) {
-                            const player = bitmovin.player(playerContainer);
-                            console.log("Player instance", player);
-                            const setupPlayer = function () {
-                                window.hivecdn.registerPlayer(player, hivecdn.PlayerVendors.BITMOVIN);
-                                enableDebugConsole(playerContainer)
-                            };
-                            if (player !== undefined) {
-                                setupPlayer();
-                            } else {
-                                console.log("player not found in this page");
-                            }
-                        } else {
-                            console.log("bitmovin library yüklenemedi");
-                        }
-                        
-                        
-                    }, 100);
-                    
-                } else {
-                    console.log('EXT: -> bitmovin not loaded');
-                }
+            window.hivecdn.settings({
+                siteId: 'hivecdn_dev-0000-0000-0000'
             });
-            
+            window.hivecdn.debugConsole.activate("");
+            // checkLoaded('bitmovin', 250, 500).then(function (bitmovinLoaded) {
+            //     if (bitmovinLoaded) {
+            //         setTimeout(function () {
+            //             var playerContainer = existsElement('playerLiveTvBitmovin') ? "playerLiveTvBitmovin" : existsElement('player') ? "player" : undefined;
+            //             // noinspection EqualityComparisonWithCoercionJS
+            //             if (playerContainer !== undefined && window.bitmovin != undefined && window.bitmovin.player != undefined) {
+            //                 const player = bitmovin.player(playerContainer);
+            //                 console.log("Player instance", player);
+            //                 const setupPlayer = function () {
+            //                     window.hivecdn.registerPlayer(player, hivecdn.PlayerVendors.BITMOVIN);
+            //                     enableDebugConsole(playerContainer)
+            //                 };
+            //                 if (player !== undefined) {
+            //                     setupPlayer();
+            //                 } else {
+            //                     console.log("player not found in this page");
+            //                 }
+            //             } else {
+            //                 if (playerContainer !== undefined)
+            //                     console.log("player container bulunamadı");
+            //                 else
+            //                     console.log("bitmovin library yüklenemedi");
+            //             }
+            //
+            //
+            //         }, 100);
+            //
+            //     } else {
+            //         console.log('EXT: -> bitmovin not loaded');
+            //     }
+            // });
+
         } else {
             console.log('EXT: -> hivecdnjs not loaded');
         }

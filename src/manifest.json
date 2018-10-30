@@ -1,7 +1,7 @@
 {
   "name": "HiveCDN Injector",
-  "description": "HivecdnJS client injector for bitmovin dash player  of beinconnect website",
-  "version": "0.1",
+  "description": "Inject hivecdnjs and start p2p demo",
+  "version": "0.2",
   "manifest_version": 3,
   "icons": {
     "16": "favicon.ico",
@@ -15,7 +15,13 @@
   "content_scripts": [
     {
       "matches": [
-        "https://www.beinconnect.com.tr/*"
+        "https://www.beinconnect.com.tr/*",
+        "https://puhutv.com/*",
+        "https://www.tv8.com.tr/*",
+        "https://www.atv.com.tr/*",
+        "https://www.fox.com.tr/*",
+        "http://mesut.ofis/*"
+
       ],
       "js": [
         "inject.js"
@@ -25,7 +31,12 @@
     },
     {
       "matches": [
-        "https://www.beinconnect.com.tr/*"
+        "https://www.beinconnect.com.tr/*",
+        "https://puhutv.com/*",
+        "https://www.tv8.com.tr/*",
+        "https://www.atv.com.tr/*",
+        "https://www.fox.com.tr/*",
+        "http://mesut.ofis/*"
       ],
       "js": [
         "inject_end.js"
@@ -42,7 +53,14 @@
     "default_title": "Hivecdn Usage Detail"
   },
   "externally_connectable": {
-    "matches": ["*://*.beinconnect.com.tr/*"],
+    "matches": [
+      "*://*.beinconnect.com.tr/*",
+      "*://*.puhutv.com/*",
+      "*://*.tv8.com.tr/*",
+      "*://*.atv.com.tr/*",
+      "*://*.fox.com.tr/*",
+      "*://mesut.ofis/*"
+    ],
     "accept_tls_channel_id":false
   }
 }

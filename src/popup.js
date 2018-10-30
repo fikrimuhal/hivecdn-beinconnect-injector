@@ -1,3 +1,6 @@
+$('#tabConnectionStatus').html("waiting ...");
+var selectedPlayerVendor = "bitmovin"
+var selectedContaierId = undefined
 var stats = {
     totalDownload: 0,
     totalUpload: 0,
@@ -42,6 +45,7 @@ function updateChart() {
 }
 
 function updateStat() {
+    console.log("updateStat called")
     $('.totalDownload').html((stats.totalDownload / (1024 * 1024)).toFixed(2));
     $('.totalUpload').html((stats.totalUpload / (1024 * 1024)).toFixed(2));
     $('.httpDownload').html((stats.cdnDownload / (1024 * 1024)).toFixed(2));
@@ -52,19 +56,24 @@ function updateStat() {
     $('.crossPercent').html(stats.crossPercent.toFixed(2));
     $('.connectedPeer').html(stats.connectedPeer);
 }
-
+var port = undefined
 chrome.runtime.onMessageExternal.addListener(function (request, sender, sendResponse) {
     console.log('message received', request);
     if (sender.url.indexOf('beinconnect') === -1) return;
 
     if (request.to === "extention") {
-        sendResponse("[extention] statları aldım")
         //{to: "extention", cmd: "stat_changed", payload: lastValues};
         stats = request.payload;
         updateChart();
         updateStat();
+        sendResponse("[extention] statları aldım")
     }
 });
+chrome.runtime.onConnectExternal.addListener(function (remotePort) {
+    port = remotePort
+    console.log('chrome.runtime.onConnect.addListener',remotePort)
+    $('#tabConnectionStatus').html("connected");
+})
 
 chrome.storage.sync.get(['inject'], function (conf) {
     
@@ -79,4 +88,38 @@ $('#chEnabled').change(function () {
     chrome.storage.sync.set({'inject': checked}, function () {
         console.log('Settings saved');
     });
+});
+
+$('input[name=playerVendor]').change(function () {
+    selectedPlayerVendor = $(this).val()
+    console.log("selectedPlayerVendor",selectedPlayerVendor)
+    if(selectedPlayerVendor === "bitmovin"){
+        $('#bitmovinContainerId').show()
+    }else{
+        $('#bitmovinContainerId').hide()
+    }
+})
+
+$('#btnStart').click(function () {
+    selectedContaierId =$('#bitmovinContainerId').val();
+    if(selectedPlayerVendor==="bitmovin" && (selectedContaierId === "" || selectedContaierId===undefined ) ){
+        alert("Container ID must not empty")
+        return;
+    }
+    if(!port){
+        alert("No tab connection")
+        return;
+    }
+    port.postMessage({
+        command:"registerPlayer",
+        payload:{
+            playerVendor:selectedPlayerVendor,
+            containerId: selectedContaierId
+        }
+    })
+});
+$('#btnDebugConsole').click(function () {
+    port.postMessage({
+        command:"debugConsoleActivate"
+    })
 });
