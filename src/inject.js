@@ -14,6 +14,17 @@ const bitmovinScripts = {
         src: 'http://192.168.2.11:5010/hivecdnjs-bitmovin-plugin.min.js'
     }
 };
+const videoJSScripts = {
+    production: {
+        src: 'http://192.168.2.11:5020/hivecdnjs-videojs-plugin.min.js'
+    },
+    stage: {
+        src: 'http://192.168.2.11:5020/hivecdnjs-videojs-plugin.min.js'
+    },
+    development: {
+        src: 'http://192.168.2.11:5020/hivecdnjs-videojs-plugin.min.js'
+    }
+};
 const demoPluginScripts = {
     production: {
         src: 'https://static.hivecdn.com/hivecdnjs-demo-plugin.production.min.js'
@@ -37,9 +48,14 @@ const hivecdnjsScripts = {
     }
 };
 var scripts = {
-    production: [hivecdnjsScripts.production, bitmovinScripts.production, demoPluginScripts.production],
-    development: [hivecdnjsScripts.development, bitmovinScripts.development, demoPluginScripts.development],
-    stage: [hivecdnjsScripts.stage, bitmovinScripts.stage, demoPluginScripts.stage]
+    production: [hivecdnjsScripts.production,
+        bitmovinScripts.production,
+        demoPluginScripts.production,
+        videoJSScripts.production
+
+    ],
+    development: [hivecdnjsScripts.development, bitmovinScripts.development, demoPluginScripts.development,videoJSScripts.development],
+    stage: [hivecdnjsScripts.stage, bitmovinScripts.stage, demoPluginScripts.stage,videoJSScripts.stage]
 };
 document.addEventListener("DOMContentLoaded", function () {
     chrome.storage.sync.get(['inject'], function (conf) {
