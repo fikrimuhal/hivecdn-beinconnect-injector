@@ -16,10 +16,10 @@ const bitmovinScripts = {
 };
 const videoJSScripts = {
     production: {
-        src: 'http://192.168.2.11:5020/hivecdnjs-videojs-plugin.min.js'
+        src: 'https://static.hivecdn.com/hivecdnjs-videojs-plugin.production.min.js'
     },
     stage: {
-        src: 'http://192.168.2.11:5020/hivecdnjs-videojs-plugin.min.js'
+        src: 'https://static.hivecdn.com/hivecdnjs-videojs-plugin.master.min.js'
     },
     development: {
         src: 'http://192.168.2.11:5020/hivecdnjs-videojs-plugin.min.js'
