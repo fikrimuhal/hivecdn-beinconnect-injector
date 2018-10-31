@@ -17,22 +17,22 @@ var stats = {
     connectedPeer: 0
 };
 
-var ctx = document.getElementById("myChart").getContext('2d');
-data = {
-    datasets: [{
-        backgroundColor: ['rgba(255, 99, 132, 0.7)', 'rgba(54, 162, 235, 0.7)', 'rgba(255, 206, 86, 0.7)'],
-        data: [0, 0, 0]
-    }], labels: ['P2P', 'CDN', 'CACHE']
-    
-};
-var myChart = new Chart(ctx, {
-    type: 'doughnut', data: data, options: {
-        title: {
-            display: true, text: 'Data Source Distribution (in MB)'
-        }
-    }
-    
-});
+// var ctx = document.getElementById("myChart").getContext('2d');
+// data = {
+//     datasets: [{
+//         backgroundColor: ['rgba(255, 99, 132, 0.7)', 'rgba(54, 162, 235, 0.7)', 'rgba(255, 206, 86, 0.7)'],
+//         data: [0, 0, 0]
+//     }], labels: ['P2P', 'CDN', 'CACHE']
+//
+// };
+// var myChart = new Chart(ctx, {
+//     type: 'doughnut', data: data, options: {
+//         title: {
+//             display: true, text: 'Data Source Distribution (in MB)'
+//         }
+//     }
+//
+// });
 
 
 function updateChart() {
@@ -56,7 +56,20 @@ function updateStat() {
     $('.crossPercent').html(stats.crossPercent.toFixed(2));
     $('.connectedPeer').html(stats.connectedPeer);
 }
-var port = undefined
+
+(function () {
+    var port = undefined
+    chrome.runtime.onConnectExternal.addListener(function (remotePort) {
+        port = remotePort
+        console.log('chrome.runtime.onConnect.addListener',remotePort)
+        $('#tabConnectionStatus').html("connected");
+        port.postMessage({
+            command:"autoStart",
+            payload:{}
+        })
+    })
+})();
+
 chrome.runtime.onMessageExternal.addListener(function (request, sender, sendResponse) {
     console.log('message received', request);
     if (sender.url.indexOf('beinconnect') === -1) return;
@@ -64,16 +77,12 @@ chrome.runtime.onMessageExternal.addListener(function (request, sender, sendResp
     if (request.to === "extention") {
         //{to: "extention", cmd: "stat_changed", payload: lastValues};
         stats = request.payload;
-        updateChart();
-        updateStat();
+        // updateChart();
+        // updateStat();
         sendResponse("[extention] statları aldım")
     }
 });
-chrome.runtime.onConnectExternal.addListener(function (remotePort) {
-    port = remotePort
-    console.log('chrome.runtime.onConnect.addListener',remotePort)
-    $('#tabConnectionStatus').html("connected");
-})
+
 
 chrome.storage.sync.get(['inject'], function (conf) {
     
@@ -83,6 +92,7 @@ chrome.storage.sync.get(['inject'], function (conf) {
         $('#chEnabled').prop('checked', false).change();
     }
 });
+
 $('#chEnabled').change(function () {
     var checked = $('#chEnabled').prop('checked') ? "true" : "false";
     chrome.storage.sync.set({'inject': checked}, function () {
@@ -100,26 +110,26 @@ $('input[name=playerVendor]').change(function () {
     }
 })
 
-$('#btnStart').click(function () {
-    selectedContaierId =$('#bitmovinContainerId').val();
-    if(selectedPlayerVendor==="bitmovin" && (selectedContaierId === "" || selectedContaierId===undefined ) ){
-        alert("Container ID must not empty")
-        return;
-    }
-    if(!port){
-        alert("No tab connection")
-        return;
-    }
-    port.postMessage({
-        command:"registerPlayer",
-        payload:{
-            playerVendor:selectedPlayerVendor,
-            containerId: selectedContaierId
-        }
-    })
-});
-$('#btnDebugConsole').click(function () {
-    port.postMessage({
-        command:"debugConsoleActivate"
-    })
-});
+// $('#btnStart').click(function () {
+//     selectedContaierId =$('#bitmovinContainerId').val();
+//     if(selectedPlayerVendor==="bitmovin" && (selectedContaierId === "" || selectedContaierId===undefined ) ){
+//         alert("Container ID must not empty")
+//         return;
+//     }
+//     if(!port){
+//         alert("No tab connection")
+//         return;
+//     }
+//     port.postMessage({
+//         command:"registerPlayer",
+//         payload:{
+//             playerVendor:selectedPlayerVendor,
+//             containerId: selectedContaierId
+//         }
+//     })
+// });
+// $('#btnDebugConsole').click(function () {
+//     port.postMessage({
+//         command:"debugConsoleActivate"
+//     })
+// });

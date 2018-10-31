@@ -6,11 +6,17 @@ function injectScript(file_path, tag, id) {
     if (id !== undefined) script.setAttribute('id', id);
     node.appendChild(script);
 }
-
+function injectIdentiyDiv(id) {
+    var node = document.getElementsByTagName('body')[0];
+    var script = document.createElement('div');
+    if (id !== undefined) script.setAttribute('id', id);
+    node.appendChild(script);
+}
 
 chrome.storage.sync.get(['inject'], function (conf) {
     if (conf !== undefined && (conf.inject === undefined || conf.inject === "true")) {
         injectScript(chrome.extension.getURL('start.js'), 'body');
+        injectIdentiyDiv('bbnaiehnaplnomikogmnladlknomdebf')
     }
 });
 

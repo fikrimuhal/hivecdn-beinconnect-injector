@@ -17,10 +17,17 @@
       "matches": [
         "https://www.beinconnect.com.tr/*",
         "https://puhutv.com/*",
+        "https://tv8.com.tr/*",
+        "https://*.tv8.com.tr/*",
         "https://www.tv8.com.tr/*",
+        "https://atv.com.tr/*",
+        "https://*.atv.com.tr/*",
         "https://www.atv.com.tr/*",
+        "https://fox.com.tr/*",
+        "https://*.fox.com.tr/*",
         "https://www.fox.com.tr/*",
-        "http://mesut.ofis/*"
+        "http://mesut.ofis/*",
+        "http://mesut.ofis:9001/*"
 
       ],
       "js": [
@@ -33,10 +40,17 @@
       "matches": [
         "https://www.beinconnect.com.tr/*",
         "https://puhutv.com/*",
+        "https://tv8.com.tr/*",
+        "https://*.tv8.com.tr/*",
         "https://www.tv8.com.tr/*",
+        "https://atv.com.tr/*",
+        "https://*.atv.com.tr/*",
         "https://www.atv.com.tr/*",
+        "https://fox.com.tr/*",
+        "https://*.fox.com.tr/*",
         "https://www.fox.com.tr/*",
-        "http://mesut.ofis/*"
+        "http://mesut.ofis/*",
+        "http://mesut.ofis:9001/*"
       ],
       "js": [
         "inject_end.js"
@@ -59,7 +73,8 @@
       "*://*.tv8.com.tr/*",
       "*://*.atv.com.tr/*",
       "*://*.fox.com.tr/*",
-      "*://mesut.ofis/*"
+      "*://mesut.ofis/*",
+      "http://mesut.ofis:9001/*"
     ],
     "accept_tls_channel_id":false
   }
