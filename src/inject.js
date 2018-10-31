@@ -2,7 +2,7 @@
  * development,stage,production
  * @type {string}
  */
-var env = "production";
+var env = "stage";
 const bitmovinScripts = {
     production: {
         src: 'https://static.hivecdn.com/hivecdnjs-bitmovin-plugin.production.min.js'
