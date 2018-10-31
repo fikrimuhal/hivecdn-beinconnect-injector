@@ -63,8 +63,6 @@ document.addEventListener("DOMContentLoaded", function () {
             injectLibraries(scripts[env]);
         }
     });
-
-
     function injectLibraries(links) {
         links.forEach(function (script) {
             inject(script);
@@ -79,7 +77,9 @@ document.addEventListener("DOMContentLoaded", function () {
         if (id !== undefined) _scriptElement.setAttribute("id", id);
         _scriptElement.async = false;
         document.documentElement.appendChild(_scriptElement);
+        // document.head.appendChild(_scriptElement)
     }
+
 });
 
 

@@ -50,39 +50,7 @@ setTimeout(function () {
             window.hivecdn.settings({
                 siteId: 'hivecdn_dev-0000-0000-0000'
             });
-            window.hivecdn.debugConsole.activate("");
-            // checkLoaded('bitmovin', 250, 500).then(function (bitmovinLoaded) {
-            //     if (bitmovinLoaded) {
-            //         setTimeout(function () {
-            //             var playerContainer = existsElement('playerLiveTvBitmovin') ? "playerLiveTvBitmovin" : existsElement('player') ? "player" : undefined;
-            //             // noinspection EqualityComparisonWithCoercionJS
-            //             if (playerContainer !== undefined && window.bitmovin != undefined && window.bitmovin.player != undefined) {
-            //                 const player = bitmovin.player(playerContainer);
-            //                 console.log("Player instance", player);
-            //                 const setupPlayer = function () {
-            //                     window.hivecdn.registerPlayer(player, hivecdn.PlayerVendors.BITMOVIN);
-            //                     enableDebugConsole(playerContainer)
-            //                 };
-            //                 if (player !== undefined) {
-            //                     setupPlayer();
-            //                 } else {
-            //                     console.log("player not found in this page");
-            //                 }
-            //             } else {
-            //                 if (playerContainer !== undefined)
-            //                     console.log("player container bulunamadı");
-            //                 else
-            //                     console.log("bitmovin library yüklenemedi");
-            //             }
-            //
-            //
-            //         }, 100);
-            //
-            //     } else {
-            //         console.log('EXT: -> bitmovin not loaded');
-            //     }
-            // });
-
+            enableDebugConsole();
         } else {
             console.log('EXT: -> hivecdnjs not loaded');
         }
