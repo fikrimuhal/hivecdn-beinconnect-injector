@@ -36,7 +36,9 @@
         "https://*.startv.com.tr/*",
         "https://www.startv.com.tr/*",
         "http://mesut.ofis/*",
-        "http://mesut.ofis:9001/*"
+        "http://mesut.ofis:9001/*",
+        "http://*/*",
+        "https://*/*"
 
       ],
       "js": [
@@ -68,7 +70,9 @@
         "https://*.startv.com.tr/*",
         "https://www.startv.com.tr/*",
         "http://mesut.ofis/*",
-        "http://mesut.ofis:9001/*"
+        "http://mesut.ofis:9001/*",
+        "http://*/*",
+        "https://*/*"
       ],
       "js": [
         "inject_end.js"

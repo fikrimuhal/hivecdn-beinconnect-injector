@@ -49,7 +49,7 @@ setTimeout(function () {
             window.hivecdn.settings({
                 siteId: 'hivecdn_dev-0000-0000-0000'
             });
-            enableDebugConsole();
+            // enableDebugConsole();
         } else {
             console.log('EXT: -> hivecdnjs not loaded');
         }
