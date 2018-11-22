@@ -2,12 +2,11 @@
   "name": "HiveCDN Injector",
   "description": "Inject hivecdnjs and start p2p demo",
   "version": "0.2",
-  "manifest_version": 3,
+  "manifest_version": 2,
   "icons": {
     "16": "favicon.ico",
     "128": "favicon.ico"
   },
-  "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC5Sq1NeTWSJlXL65lPcec6Fi5RBDBwjOsuvlypR8BkBsSN6e+nPiOBT432mA8xHDQT2SiAKK4jtoUcfdUrvR+4J5K1/3UmCrTqNQ0773sD14W+u9WDowsIwehh0Pso1jxTdoM31JRExRKBI8/w2Sup7zr40dLmV+bVAnT9ruwtuwIDAQAB",
   "permissions": [
     "tabs",
     "storage"

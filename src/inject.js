@@ -2,7 +2,7 @@
  * development,stage,production
  * @type {string}
  */
-var env = "stage";
+var env = "production";
 const bitmovinScripts = {
     production: {
         src: 'https://static.hivecdn.com/hivecdnjs-bitmovin-plugin.production.min.js'
@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
         var _scriptElement = document.createElement("script");
         _scriptElement.setAttribute("src", src + "?v=" + Date.now());
         if (id !== undefined) _scriptElement.setAttribute("id", id);
-        _scriptElement.async = true;
+        // _scriptElement.async = true;
         document.documentElement.appendChild(_scriptElement);
         // document.head.appendChild(_scriptElement)
     }

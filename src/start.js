@@ -5,15 +5,15 @@ function checkLoaded(variable, interval, maxCount) {
         var timerId = setInterval(function () {
             count++;
             isLoaded = (window[variable] !== undefined);
-            console.log('module load checker:  ', variable, isLoaded);
+            // console.log('module load checker:  ', variable, isLoaded);
             if (count === maxCount || isLoaded) {
-                console.log('module load checker finished', count, " isLoaded", isLoaded, window[variable]);
+                // console.log('module load checker finished', count, " isLoaded", isLoaded, window[variable]);
                 finish();
             }
         }, interval);
 
         function finish() {
-            console.log('EXT: -> ' + variable + 'loaded');
+            // console.log('EXT: -> ' + variable + 'loaded');
             clearTimeout(timerId);
             resolve(isLoaded);
         }
@@ -51,7 +51,7 @@ setTimeout(function () {
             });
             // enableDebugConsole();
         } else {
-            console.log('EXT: -> hivecdnjs not loaded');
+            // console.log('EXT: -> hivecdnjs not loaded');
         }
     });
 }, 1000);
