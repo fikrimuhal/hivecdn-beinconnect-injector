@@ -86,3 +86,5 @@ document.addEventListener("DOMContentLoaded", function () {
 chrome.runtime.onConnect.addListener(function (port) {
     console.log('chrome.runtime.onConnect.addListener',port)
 })
+
+window.hivecdn=window.hivecdn||function(){(hivecdn.q=hivecdn.q||[]).push(arguments)};hivecdn.l=+new Date;hivecdn("demo","start");var dd=document;var sc=dd.createElement('script');sc.src='https://static.hivecdn.com/hivecdn.production.min.js';sc.async=true;dd.head.appendChild(sc);
